@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生日邀请 · 林语嫣</title>
+    <!-- Google Fonts 优雅字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== 全局重置 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(145deg, #f9f3e8 0%, #f0e6d3 100%);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ===== 背景装饰 ===== */
+        .bg-deco {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .bg-deco .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+            animation: floatBg 20s ease-in-out infinite alternate;
+        }
+        .bg-deco .circle:nth-child(1) {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            right: -100px;
+            animation-delay: 0s;
+        }
+        .bg-deco .circle:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            bottom: -120px;
+            left: -80px;
+            animation-delay: 4s;
+            background: radial-gradient(circle, rgba(245, 215, 110, 0.06) 0%, transparent 70%);
+        }
+        .bg-deco .circle:nth-child(3) {
+            width: 300px;
+            height: 300px;
+            top: 40%;
+            left: 60%;
+            animation-delay: 8s;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+        }
+
+        @keyframes floatBg {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(30px, -20px) scale(1.1);
+            }
+        }
+
+        /* ===== 主卡片容器 ===== */
+        .invitation-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: fadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== 卡片 ===== */
+        .invitation-card {
+            position: relative;
+            background: rgba(255, 248, 240, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 56px 56px 48px 48px;
+            padding: 50px 44px 48px;
+            box-shadow:
+                0 40px 100px rgba(0, 0, 0, 0.10),
+                0 0 0 1px rgba(212, 175, 55, 0.20) inset,
+                0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+            overflow: hidden;
+            transition: box-shadow 0.5s ease;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .invitation-card:hover {
+            box-shadow:
+                0 60px 140px rgba(0, 0, 0, 0.12),
+                0 0 0 2px rgba(212, 175, 55, 0.30) inset,
+                0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+        }
+
+        /* ===== 顶部装饰丝带 ===== */
+        .ribbon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .ribbon .line {
+            flex: 1;
+            height: 2px;
+            max-width: 50px;
+            background: linear-gradient(90deg, transparent, #d4af37);
+        }
+        .ribbon .line.right {
+            background: linear-gradient(90deg, #d4af37, transparent);
+        }
+        .ribbon .icon {
+            font-size: 24px;
+            color: #d4af37;
+            opacity: 0.6;
+        }
+
+        /* ===== 标题 ===== */
+        .sub-title {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 22px;
+            color: #b8923b;
+            letter-spacing: 3px;
+            margin-bottom: 2px;
+        }
+
+        .main-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #b8860b, #d4af37, #f5d76e, #d4af37);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: goldShine 5s ease-in-out infinite alternate;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        @keyframes goldShine {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .sub-deco {
+            text-align: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 24px;
+            color: rgba(184, 134, 11, 0.4);
+            letter-spacing: 8px;
+            margin-top: -8px;
+            margin-bottom: 14px;
+        }
+
+        /* ===== 分隔符 ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin: 16px 0 24px;
+        }
+        .divider .line {
+            flex: 1;
+            height: 1px;
+            max-width: 30px;
+            background: linear-gradient(90deg, transparent, #d4af37);
+        }
+        .divider .line.right {
+            background: linear-gradient(90deg, #d4af37, transparent);
+        }
+        .divider .star {
+            color: #d4af37;
+            font-size: 18px;
+            opacity: 0.6;
+        }
+
+        /* ===== 正文 ===== */
+        .invitation-text {
+            text-align: center;
+            color: #3d2b1a;
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 1.9;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .invitation-text .highlight {
+            color: #b8860b;
+            font-weight: 500;
+        }
+        .invitation-text .name {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #b8860b, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            margin: 4px 0;
+        }
+        .invitation-text .emoji-big {
+            font-size: 22px;
+            font-style: normal;
+        }
+
+        /* ===== 详情卡片网格 ===== */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 20px;
+            margin: 28px 0 30px;
+        }
+        .detail-item {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 16px 10px;
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            backdrop-filter: blur(4px);
+            transition: all 0.3s ease;
+        }
+        .detail-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.10);
+            border-color: #d4af37;
+            background: rgba(255, 255, 255, 0.7);
+        }
+        .detail-item .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #b8923b;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .detail-item .value {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: #2b1b0e;
+        }
+        .detail-item .value.gold {
+            color: #b8860b;
+        }
+        .detail-item.full {
+            grid-column: 1 / -1;
+        }
+
+        /* ===== RSVP 按钮 ===== */
+        .rsvp-wrapper {
+            text-align: center;
+            margin-top: 8px;
+        }
+        .rsvp-btn {
+            position: relative;
+            display: inline-block;
+            padding: 18px 56px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: #fff;
+            background: linear-gradient(135deg, #b8860b, #d4af37, #f5d76e);
+            background-size: 200% 200%;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 10px 40px rgba(184, 134, 11, 0.25);
+            text-transform: uppercase;
+            animation: btnGradient 4s ease-in-out infinite alternate;
+            overflow: hidden;
+        }
+        .rsvp-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent 60%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+        .rsvp-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 16px 50px rgba(184, 134, 11, 0.35);
+        }
+        .rsvp-btn:hover::after {
+            opacity: 1;
+        }
+        .rsvp-btn:active {
+            transform: scale(0.96);
+        }
+
+        @keyframes btnGradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .rsvp-btn .btn-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== 底部装饰 ===== */
+        .footer-deco {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+        .footer-deco .line {
+            flex: 1;
+            height: 1px;
+            max-width: 40px;
+            background: linear-gradient(90deg, transparent, #d4af37);
+        }
+        .footer-deco .line.right {
+            background: linear-gradient(90deg, #d4af37, transparent);
+        }
+        .footer-deco .dots {
+            color: #d4af37;
+            font-size: 14px;
+            letter-spacing: 8px;
+            opacity: 0.4;
+        }
+
+        /* ===== 浮动装饰（CSS动画） ===== */
+        .float-deco {
+            position: absolute;
+            pointer-events: none;
+            font-size: 28px;
+            opacity: 0.15;
+            z-index: 0;
+            animation: floatAround 14s ease-in-out infinite alternate;
+        }
+        .float-deco.f1 {
+            top: 6%;
+            left: 5%;
+            font-size: 36px;
+            animation-delay: 0s;
+            opacity: 0.10;
+            color: #d4af37;
+        }
+        .float-deco.f2 {
+            bottom: 8%;
+            right: 4%;
+            font-size: 30px;
+            animation-delay: 3s;
+            opacity: 0.12;
+            color: #f5d76e;
+        }
+        .float-deco.f3 {
+            top: 18%;
+            right: 8%;
+            font-size: 22px;
+            animation-delay: 6s;
+            opacity: 0.08;
+            color: #b8860b;
+        }
+        .float-deco.f4 {
+            bottom: 22%;
+            left: 6%;
+            font-size: 26px;
+            animation-delay: 2s;
+            opacity: 0.10;
+            color: #d4af37;
+        }
+        .float-deco.f5 {
+            top: 45%;
+            left: 2%;
+            font-size: 20px;
+            animation-delay: 5s;
+            opacity: 0.06;
+            color: #f5d76e;
+        }
+        .float-deco.f6 {
+            top: 40%;
+            right: 2%;
+            font-size: 24px;
+            animation-delay: 7s;
+            opacity: 0.07;
+            color: #d4af37;
+        }
+
+        @keyframes floatAround {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            33% {
+                transform: translate(14px, -20px) rotate(6deg) scale(1.08);
+            }
+            66% {
+                transform: translate(-10px, 16px) rotate(-4deg) scale(0.92);
+            }
+            100% {
+                transform: translate(8px, -12px) rotate(3deg) scale(1.04);
+            }
+        }
+
+        /* ===== 飘落花瓣（用CSS实现） ===== */
+        .petal {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            font-size: 20px;
+            opacity: 0.25;
+            animation: fall linear infinite;
+            color: #f5d76e;
+        }
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: translateY(110vh) rotate(720deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 640px) {
+            .invitation-card {
+                padding: 36px 24px 32px;
+                border-radius: 40px 40px 32px 32px;
+            }
+            .main-title {
+                font-size: 34px;
+                letter-spacing: 2px;
+            }
+            .sub-title {
+                font-size: 18px;
+            }
+            .sub-deco {
+                font-size: 18px;
+                letter-spacing: 6px;
+            }
+            .invitation-text {
+                font-size: 15px;
+            }
+            .invitation-text .name {
+                font-size: 26px;
+            }
+            .details-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px 16px;
+                margin: 22px 0 24px;
+            }
+            .detail-item .value {
+                font-size: 16px;
+            }
+            .detail-item .label {
+                font-size: 10px;
+            }
+            .rsvp-btn {
+                padding: 14px 40px;
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+            .float-deco {
+                display: none;
+            }
+            .ribbon .line {
+                max-width: 30px;
+            }
+            .divider .line {
+                max-width: 20px;
+            }
+            .footer-deco .line {
+                max-width: 25px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .invitation-card {
+                padding: 28px 16px 26px;
+                border-radius: 32px 32px 24px 24px;
+            }
+            .main-title {
+                font-size: 28px;
+            }
+            .details-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .detail-item.full {
+                grid-column: 1;
+            }
+            .rsvp-btn {
+                padding: 12px 28px;
+                font-size: 12px;
+                letter-spacing: 2px;
+            }
+            .invitation-text .name {
+                font-size: 22px;
+            }
+            .sub-deco {
+                font-size: 16px;
+            }
+        }
+
+        /* ===== Toast ===== */
+        .toast {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: rgba(255, 248, 240, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: 1px solid #d4af37;
+            box-shadow: 0 16px 50px rgba(0, 0, 0, 0.10);
+            color: #3d2b1a;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 100;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        @media (max-width: 480px) {
+            .toast {
+                font-size: 13px;
+                padding: 12px 24px;
+                white-space: normal;
+                max-width: 85%;
+                text-align: center;
+                bottom: 24px;
+            }
+        }
+
+        /* ===== 点击反馈 ===== */
+        .rsvp-btn.clicked {
+            animation: clickPop 0.5s ease forwards;
+        }
+        @keyframes clickPop {
+            0% {
+                transform: scale(1);
+            }
+            30% {
+                transform: scale(0.92);
+            }
+            60% {
+                transform: scale(1.06);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 背景装饰 ===== -->
+    <div class="bg-deco">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- ===== 飘落花瓣（JavaScript生成） ===== -->
+
+    <!-- ===== Toast ===== -->
+    <div class="toast" id="toast">🎉 感谢回复，期待与您共度美好时光！</div>
+
+    <!-- ===== 主邀请函 ===== -->
+    <div class="invitation-wrapper">
+
+        <div class="invitation-card">
+
+            <!-- 浮动装饰 -->
+            <span class="float-deco f1">✦</span>
+            <span class="float-deco f2">✧</span>
+            <span class="float-deco f3">✦</span>
+            <span class="float-deco f4">✧</span>
+            <span class="float-deco f5">✦</span>
+            <span class="float-deco f6">✧</span>
+
+            <!-- ===== 内容 ===== -->
+            <div class="ribbon">
+                <span class="line"></span>
+                <span class="icon">🎂</span>
+                <span class="line right"></span>
+            </div>
+
+            <div class="sub-title">— You're Invited —</div>
+            <h1 class="main-title">生日邀请函</h1>
+            <div class="sub-deco">· Birthday ·</div>
+
+            <div class="divider">
+                <span class="line"></span>
+                <span class="star">✦</span>
+                <span class="line right"></span>
+            </div>
+
+            <div class="invitation-text">
+                诚挚邀请您参加
+                <br />
+                <span class="name">林语嫣</span>
+                <br />
+                的 <span class="highlight">生日派对</span>
+                <br />
+                <span class="emoji-big">🎈</span> 与我们一起庆祝这美好的时刻 <span class="emoji-big">🎈</span>
+            </div>
+
+            <!-- 详情 -->
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="label">📅 日期</div>
+                    <div class="value gold">2026.06.19</div>
+                </div>
+                <div class="detail-item">
+                    <div class="label">⏰ 时间</div>
+                    <div class="value gold">18:00 — 22:00</div>
+                </div>
+                <div class="detail-item full">
+                    <div class="label">📍 地点</div>
+                    <div class="value">云澜·宴会厅 · 三楼星光厅</div>
+                </div>
+                <div class="detail-item full" style="background: rgba(212,175,55,0.05); border-color: #d4af37;">
+                    <div class="label">💌 着装要求</div>
+                    <div class="value" style="font-size:15px; font-weight:400; color:#5a3e1f;">
+                        优雅正装 · 金色点缀
+                    </div>
+                </div>
+            </div>
+
+            <!-- RSVP -->
+            <div class="rsvp-wrapper">
+                <button class="rsvp-btn" id="rsvpBtn">
+                    <span class="btn-text">✦ 确认出席 ✦</span>
+                </button>
+            </div>
+
+            <div class="footer-deco">
+                <span class="line"></span>
+                <span class="dots">✦ ✦ ✦</span>
+                <span class="line right"></span>
+            </div>
+
+        </div>
+        <!-- /invitation-card -->
+    </div>
+    <!-- /invitation-wrapper -->
+
+    <script>
+        // ============================================================
+        //  1. 飘落花瓣效果
+        // ============================================================
+        (function createPetals() {
+            const body = document.body;
+            const petalSymbols = ['🌸', '🌺', '🌸', '🌸', '🌸']; // 主要是樱花
+            const petalCount = 30;
+            for (let i = 0; i < petalCount; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.textContent = petalSymbols[Math.floor(Math.random() * petalSymbols.length)];
+                const left = Math.random() * 100;
+                const size = 16 + Math.random() * 18;
+                const duration = 12 + Math.random() * 18;
+                const delay = Math.random() * 20;
+                petal.style.left = left + '%';
+                petal.style.fontSize = size + 'px';
+                petal.style.animationDuration = duration + 's';
+                petal.style.animationDelay = delay + 's';
+                petal.style.opacity = 0.15 + Math.random() * 0.2;
+                body.appendChild(petal);
+            }
+        })();
+
+
+        // ============================================================
+        //  2. RSVP 按钮交互
+        // ============================================================
+        (function rsvpInteraction() {
+            const btn = document.getElementById('rsvpBtn');
+            const toast = document.getElementById('toast');
+            let toastTimer = null;
+
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // 按钮点击动画
+                this.classList.remove('clicked');
+                void this.offsetWidth;
+                this.classList.add('clicked');
+
+                // 显示 toast
+                toast.classList.add('show');
+                if (toastTimer) clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                    toastTimer = null;
+                }, 3000);
+
+                // 按钮反馈
+                const textSpan = this.querySelector('.btn-text');
+                const originalText = textSpan.textContent;
+                textSpan.textContent = '✓ 已确认';
+                this.style.background = 'linear-gradient(135deg, #2d8a4e, #3aad6a)';
+                this.style.boxShadow = '0 10px 40px rgba(45, 138, 78, 0.3)';
+                this.disabled = true;
+                this.style.cursor = 'default';
+
+                setTimeout(() => {
+                    textSpan.textContent = originalText;
+                    this.style.background = '';
+                    this.style.boxShadow = '';
+                    this.disabled = false;
+                    this.style.cursor = 'pointer';
+                    this.classList.remove('clicked');
+                }, 4000);
+            });
+
+            // 键盘
+            btn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+        })();
+
+        // 控制台提示
+        console.log('🎂 生日邀请函 · 林语嫣');
+        console.log('✨ 祝您拥有一个璀璨的生日！');
+    </script>
+
+</body>
+</html>
